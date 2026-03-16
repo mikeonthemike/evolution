@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#0b0c0a"/>
+  <rect x="1" y="1" width="1198" height="628" fill="none" stroke="#272820" stroke-width="1"/>
+  <text x="600" y="280" font-family="Georgia, serif" font-size="72" font-weight="300" fill="#e8b84b" text-anchor="middle">Evolution × AI</text>
+  <text x="600" y="340" font-family="Georgia, serif" font-size="32" fill="#7a7260" text-anchor="middle">A Pattern Library</text>
+  <text x="600" y="400" font-family="Georgia, monospace" font-size="14" letter-spacing="0.2em" fill="#5a5446" text-anchor="middle">Where design loses control to emergence</text>
+</svg>

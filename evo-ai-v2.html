@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolution × AI: A Pattern Library</title>
+<meta name="description" content="AI is a designed system that produces evolutionary-looking patterns. This is a library of those patterns — what they mean, how confidently they transfer, and what they suggest you should accelerate or prepare for.">
+<!-- Open Graph / social -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Evolution × AI: A Pattern Library">
+<meta property="og:description" content="AI is a designed system that produces evolutionary-looking patterns. This is a library of those patterns — what they mean, how confidently they transfer, and what they suggest you should accelerate or prepare for.">
+<meta property="og:image" content="og-image.svg">
+<meta property="og:image:alt" content="Evolution × AI — A Pattern Library. Where design loses control to emergence.">
+<!-- Fonts: system stack only (no Google Fonts) for performance and privacy -->
+<style>
+  :root {
+    --bg:       #0b0c0a;
+    --bg2:      #111210;
+    --bg3:      #181916;
+    --bg4:      #1e1f1b;
+    --border:   #272820;
+    --border2:  #33342a;
+
+    --amber:     #c8922a;
+    --amber-dim: #6b4e18;
+    --amber-glow:#e8b84b;
+    --fossil:    #7a7260;
+    --text:      #cec3a2;
+    --text-dim:  #5a5446;
+    --text-bright:#ece0bc;
+
+    --accelerate: #4a8a5a;
+    --acc-dim:    #2a4f33;
+    --acc-glow:   #7abf8a;
+
+    --prepare:    #c44b3a;
+    --prep-dim:   #6b2820;
+    --prep-glow:  #e87a6a;
+
+    --caveat:     #3a6a8a;
+    --cav-dim:    #1e3d52;
+    --cav-glow:   #6aaecf;
+
+    --structural: #8a6abf;
+    --str-dim:    #4a3a6b;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* noise */
+  body::after {
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events:none;
+    z-index:9999;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────── */
+  header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 1.5rem 2.5rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #090a08 0%, transparent 100%);
+    animation: fadeD .7s ease both;
+  }
+
+  @keyframes fadeD { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
+  @keyframes fadeU { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+  @keyframes entryFadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+  .entry-inner { animation: entryFadeIn 0.35s ease both; }
+
+  .hd-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.85rem;
+    font-weight: 300;
+    color: var(--amber-glow);
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+  .hd-title em { font-style: italic; color: var(--fossil); }
+
+  .hd-sub {
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-top: 0.45rem;
+  }
+
+  .hd-right {
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.58rem;
+    color: var(--text-dim);
+    text-align: right;
+    line-height: 1.9;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── LEGEND ──────────────────────────────────────────── */
+  .legend {
+    flex-shrink: 0;
+    display: flex;
+    gap: 2rem;
+    padding: 0.6rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    animation: fadeD .7s .05s ease both;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .leg-pip {
+    width: 8px; height: 8px;
+    border-radius: 1px;
+  }
+  .leg-acc  { background: var(--accelerate); }
+  .leg-prep { background: var(--prepare); }
+  .leg-cav  { background: var(--caveat); }
+  .leg-str  { background: var(--structural); }
+
+  /* ── LAYOUT ──────────────────────────────────────────── */
+  .body-wrap {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 0;
+    animation: fadeU .7s .1s ease both;
+  }
+
+  /* ── SIDEBAR ─────────────────────────────────────────── */
+  .sidebar {
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 1rem 0 2rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .sb-section-label {
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.53rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    padding: 1rem 1.25rem 0.35rem;
+    display: block;
+  }
+
+  .sb-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.5rem 1.25rem;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: all .15s;
+    /* button reset so it looks like existing design */
+    width: 100%;
+    text-align: left;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+  }
+  .sb-item:hover { background: var(--bg3); color: var(--text-bright); }
+  .sb-item.active {
+    border-left-color: var(--amber);
+    background: var(--bg3);
+    color: var(--amber-glow);
+  }
+  /* Focus visible for keyboard users; outline matches theme */
+  .sb-item:focus { outline: none; }
+  .sb-item:focus-visible {
+    outline: 2px solid var(--amber-glow);
+    outline-offset: 2px;
+  }
+
+  .sb-pip {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-top: 0.45rem;
+    flex-shrink: 0;
+  }
+  .pip-structural { background: var(--structural); }
+  .pip-uncertain  { background: var(--fossil); }
+  .pip-novel      { background: var(--amber); }
+  .pip-caveat     { background: var(--caveat); }
+
+  .sb-text { font-size: 0.85rem; line-height: 1.35; }
+  .sb-sub  { font-size: 0.72rem; color: var(--text-dim); margin-top: 0.1rem; line-height: 1.3; }
+  .sb-item.active .sb-sub { color: var(--amber-dim); }
+
+  /* ── MAIN ────────────────────────────────────────────── */
+  .main {
+    overflow-y: auto;
+    padding: 2rem 2.5rem 3rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  /* ── ENTRY ───────────────────────────────────────────── */
+  .entry-head {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .entry-eyebrow {
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.57rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .ey-structural { color: var(--structural); }
+  .ey-uncertain  { color: var(--fossil); }
+  .ey-novel      { color: var(--amber); }
+  .ey-caveat     { color: var(--caveat); }
+
+  .entry-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--text-bright);
+    line-height: 1.1;
+    margin-bottom: 0.4rem;
+  }
+
+  .entry-premise {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--fossil);
+    line-height: 1.5;
+    max-width: 680px;
+  }
+
+  /* ── TRANSFER CONFIDENCE ─────────────────────────────── */
+  .confidence-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .conf-label {
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    width: 130px;
+    flex-shrink: 0;
+  }
+  .conf-track {
+    flex: 1;
+    height: 3px;
+    background: var(--border2);
+    border-radius: 2px;
+    max-width: 200px;
+  }
+  .conf-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--amber-dim), var(--amber-glow));
+  }
+  .conf-note {
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.55rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── PATTERN BLOCK ───────────────────────────────────── */
+  .pattern-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 1.25rem;
+    margin-bottom: 0.1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .pattern-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+  }
+  .pb-fossil::before  { background: var(--fossil); }
+  .pb-amber::before   { background: var(--amber); }
+  .pb-acc::before     { background: var(--accelerate); }
+  .pb-prep::before    { background: var(--prepare); }
+  .pb-cav::before     { background: var(--caveat); }
+  .pb-str::before     { background: var(--structural); }
+
+  .pb-label {
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .pbl-fossil  { color: var(--fossil); }
+  .pbl-amber   { color: var(--amber); }
+  .pbl-acc     { color: var(--acc-glow); }
+  .pbl-prep    { color: var(--prep-glow); }
+  .pbl-cav     { color: var(--cav-glow); }
+  .pbl-str     { color: var(--structural); }
+
+  .pb-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .pb-body {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .pb-body em { color: var(--text-bright); font-style: normal; }
+
+  /* ── ACTION BLOCKS ───────────────────────────────────── */
+  .action-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    margin: 1px 0;
+    background: var(--border);
+  }
+
+  .action-block {
+    padding: 1.25rem;
+    position: relative;
+  }
+
+  .ab-acc  { background: rgba(74,138,90,0.07); }
+  .ab-prep { background: rgba(196,75,58,0.07); }
+
+  .ab-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .ab-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .ab-label {
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .abl-acc  { color: var(--acc-glow); }
+  .abl-prep { color: var(--prep-glow); }
+
+  .ab-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 0.5rem;
+  }
+
+  .ab-body {
+    font-size: 0.88rem;
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  .ab-body em { font-style: normal; color: var(--text-bright); }
+
+  /* action bullets */
+  .action-bullets {
+    list-style: none;
+    margin-top: 0.75rem;
+    padding: 0;
+  }
+  .action-bullets li {
+    font-size: 0.83rem;
+    color: var(--text);
+    padding: 0.3rem 0 0.3rem 1.1rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  .action-bullets li::before {
+    position: absolute;
+    left: 0;
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.7rem;
+  }
+  .ab-acc .action-bullets li::before  { content: '→'; color: var(--acc-glow); }
+  .ab-prep .action-bullets li::before { content: '!'; color: var(--prep-glow); }
+
+  /* ── CAVEAT BLOCK ────────────────────────────────────── */
+  .caveat-block {
+    background: rgba(58,106,138,0.07);
+    border: 1px solid var(--cav-dim);
+    padding: 1.1rem 1.25rem;
+    margin-top: 1px;
+  }
+
+  .cav-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .cav-label {
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cav-glow);
+  }
+
+  .cav-body {
+    font-size: 0.85rem;
+    color: #8aa8be;
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  /* ── QUOTE ───────────────────────────────────────────── */
+  .pull-quote {
+    border-left: 2px solid var(--amber-dim);
+    padding: 0.75rem 1.25rem;
+    margin: 1px 0;
+    background: var(--bg3);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--fossil);
+    line-height: 1.6;
+  }
+
+  /* ── SIGNAL TABLE ────────────────────────────────────── */
+  .signal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+  }
+  .signal-table th {
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-align: left;
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--border2);
+    background: var(--bg3);
+  }
+  .signal-table td {
+    padding: 0.65rem 0.9rem;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .signal-table tr:last-child td { border-bottom: none; }
+  .signal-table tr:hover td { background: var(--bg3); }
+
+  .sig-watch { color: var(--amber-glow); font-family: 'Consolas', 'Monaco', 'Menlo', monospace; font-size: 0.72rem; }
+  .sig-acc   { color: var(--acc-glow);  font-family: 'Consolas', 'Monaco', 'Menlo', monospace; font-size: 0.72rem; }
+  .sig-prep  { color: var(--prep-glow); font-family: 'Consolas', 'Monaco', 'Menlo', monospace; font-size: 0.72rem; }
+
+  /* ── WELCOME ─────────────────────────────────────────── */
+  .welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 55vh;
+    text-align: center;
+    opacity: 0.65;
+  }
+  .welcome-glyph {
+    font-size: 3.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .welcome h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.4rem;
+    color: var(--fossil);
+    margin-bottom: 0.6rem;
+  }
+  .welcome p {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    max-width: 360px;
+    line-height: 1.7;
+  }
+
+  /* ── SECTION DIVIDER ─────────────────────────────────── */
+  .sdiv {
+    height: 1px;
+    background: var(--border);
+    margin: 0.1rem 0;
+  }
+
+  /* scrollbar */
+  .sidebar::-webkit-scrollbar,
+  .main::-webkit-scrollbar { width: 3px; }
+  .sidebar::-webkit-scrollbar-thumb,
+  .main::-webkit-scrollbar-thumb { background: var(--border2); }
+
+  /* ── PREAMBLE PANEL ──────────────────────────────────────── */
+  .preamble-panel { max-width: 680px; }
+
+  .preamble-eyebrow {
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.57rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    margin-bottom: 0.75rem;
+  }
+
+  .preamble-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--text-bright);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .preamble-lead {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--fossil);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .preamble-body {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .preamble-body p { margin-bottom: 1rem; }
+  .preamble-body p:last-child { margin-bottom: 0; }
+  .preamble-body em { color: var(--text-bright); font-style: normal; }
+
+  .preamble-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 1.5rem;
+  }
+
+  .preamble-cell {
+    padding: 1rem 1.1rem;
+    background: var(--bg2);
+  }
+
+  .pcell-label {
+    font-family: 'Consolas', 'Monaco', 'Menlo', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .pcell-label-str { color: var(--structural); }
+  .pcell-label-unc { color: var(--fossil); }
+  .pcell-label-nov { color: var(--amber); }
+  .pcell-label-cav { color: var(--caveat); }
+
+  .pcell-body {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.55;
+  }
+
+  .preamble-boundary {
+    background: rgba(200,146,42,0.06);
+    border: 1px solid var(--amber-dim);
+    padding: 1.1rem 1.25rem;
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.75;
+  }
+  .preamble-boundary strong { color: var(--amber-glow); font-weight: 400; }
+
+  /* ── MOBILE RESPONSIVENESS (< 768px) ─────────────────────
+   * Sidebar becomes horizontal scrollable tab strip below header;
+   * main content takes full width.
+   */
+  @media (max-width: 767px) {
+    .body-wrap {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 1rem 0.5rem;
+      gap: 0.15rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+
+    .sb-section-label {
+      flex: 0 0 auto;
+      padding: 0.5rem 0.6rem 0.5rem 0.9rem;
+      margin-right: 0.25rem;
+      border-right: 1px solid var(--border);
+      align-self: center;
+      font-size: 0.5rem;
+    }
+
+    .sb-item {
+      flex: 0 0 auto;
+      width: auto;
+      border-left: none;
+      border-bottom: 2px solid transparent;
+      padding: 0.5rem 0.75rem;
+      min-width: max-content;
+    }
+    .sb-item:hover { background: var(--bg3); }
+    .sb-item.active {
+      border-left-color: transparent;
+      border-bottom-color: var(--amber);
+    }
+
+    .sb-sub { display: none; }
+    .sb-pip { margin-top: 0.25rem; }
+
+    .main {
+      padding: 1.25rem 1.25rem 2rem;
+    }
+
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem 1.25rem;
+      gap: 0.75rem;
+    }
+    .hd-right { text-align: left; }
+
+    .legend {
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0.5rem 1.25rem;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="hd-title">Evolution <em>×</em> Artificial Intelligence</div>
+    <div class="hd-sub">A Pattern Library — Where Intelligent Design Loses Control to Emergence</div>
+  </div>
+  <div class="hd-right">
+    PURPOSE: Strategic pattern recognition, not prediction<br>
+    QUESTION: Where do evolutionary forces apply, and what do they tell us?<br>
+    CAVEATS: Gould · Dawkins · Laland · Pigliucci · Stoltzfus · West-Eberhard
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="leg-pip leg-str"></div>Structural Force</div>
+  <div class="legend-item"><div class="leg-pip" style="background:var(--fossil)"></div>Uncertain Transfer</div>
+  <div class="legend-item"><div class="leg-pip leg-acc"></div>Accelerate</div>
+  <div class="legend-item"><div class="leg-pip leg-prep"></div>Prepare For</div>
+  <div class="legend-item"><div class="leg-pip leg-cav"></div>Theoretical Caveat</div>
+</div>
+
+<div class="body-wrap">
+  <nav class="sidebar" id="sidebar" role="navigation" aria-label="Pattern library entries"></nav>
+  <main class="main" id="main" aria-label="Entry content"></main>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────────────────────
+const SECTIONS = [
+  {
+    label: 'About This Framework',
+    sublabel: null,
+    pip: 'pip-caveat',
+    items: ['preamble']
+  },
+  {
+    label: 'Structural Forces',
+    sublabel: 'Apply regardless of what emerges',
+    pip: 'pip-structural',
+    items: ['selection-regime', 'niche-differentiation', 'variation-engine', 'extinction-reset']
+  },
+  {
+    label: 'Uncertain Transfers',
+    sublabel: 'Logic transfers; mechanism may not',
+    pip: 'pip-uncertain',
+    items: ['coevo-speed', 'drift-accident']
+  },
+  {
+    label: 'Genuinely Novel Territory',
+    sublabel: 'No clean biological precedent',
+    pip: 'pip-novel',
+    items: ['lamarckian', 'self-aware-selection', 'horizontal-speed']
+  },
+  {
+    label: 'Theoretical Caveats',
+    sublabel: 'Gould & Dawkins — where the analogies break',
+    pip: 'pip-caveat',
+    items: ['just-so', 'replicator', 'contingency', 'drift-caveat']
+  },
+  {
+    label: 'Contemporary Challenges',
+    sublabel: 'Post-synthesis theorists — what the framework still misses',
+    pip: 'pip-caveat',
+    items: ['laland-niche', 'pigliucci-evolvability', 'stoltzfus-cne', 'west-eberhard-plasticity']
+  }
+];
+
+const ENTRIES = {
+
+  // ── PREAMBLE ───────────────────────────────────────────────
+
+  'preamble': {
+    title: 'What This Is',
+    premise: 'A pattern library for strategic thinking about AI — drawn from evolutionary biology, disciplined by its own limits.',
+    eyebrow: 'About This Framework',
+    eyClass: 'ey-caveat',
+    confidence: null,
+    confNote: null,
+    isPreamble: true,
+    biological: null,
+    currentSelector: null,
+    selectorShift: null,
+    accelerate: null,
+    prepare: null,
+    caveat: null,
+  },
+
+  // ── STRUCTURAL FORCES ──────────────────────────────────────
+
+  'selection-regime': {
+    title: 'Selection Pressure Is Real — But the Selector Keeps Changing',
+    premise: 'The force is structural. What it selects for is contingent on who holds power in the environment at any given moment.',
+    eyebrow: 'Structural Force',
+    eyClass: 'ey-structural',
+    confidence: 0.85,
+    confNote: 'High — substrate-independent logic',
+    biological: {
+      title: 'The Mechanism',
+      body: 'Selection pressure is not a force applied to organisms — it is the environment\'s implicit vote. <em>Traits that increase reproductive fitness persist; those that don\'t are eliminated.</em> Critically, the environment is not static. Mass extinction events, climate shifts, new predators — the selector changes, and yesterday\'s optimal trait becomes tomorrow\'s liability. The peacock\'s tail is selected for by mate preference; in a different predation environment, it would be lethal.'
+    },
+    currentSelector: {
+      title: 'The Current AI Selection Regime',
+      body: 'The AI ecosystem is currently being selected by: <em>benchmark performance, capital availability, enterprise procurement cycles, developer adoption, and inference cost-per-token.</em> These are not eternal selectors. Each is contingent on the current moment — particular investors, particular enterprise buyers, particular benchmark designers.'
+    },
+    selectorShift: {
+      title: 'When the Selector Changes',
+      body: 'The next likely selector shifts: <em>energy efficiency</em> as compute costs dominate; <em>regulatory compliance</em> as liability frameworks crystallise; <em>inference economics</em> as cloud margins compress; <em>trust and auditability</em> as enterprise risk managers gain influence. Entities optimised for the current regime will be maladapted when it flips.'
+    },
+    accelerate: {
+      title: 'Position for the Next Selector',
+      body: 'The opportunity is not winning the current selection game — it\'s anticipating which traits will be fit under the next selection regime and building them now when the cost is low.',
+      bullets: [
+        'Build energy-efficient inference infrastructure before efficiency becomes survival-critical',
+        'Treat regulatory compliance as R&D investment, not overhead — it becomes a moat when the selector flips',
+        'Develop auditability and explainability tooling ahead of demand curve',
+        'Identify which current "winning" traits are specifically adapted to the current capital environment'
+      ]
+    },
+    prepare: {
+      title: 'Selector Flip Risk',
+      body: 'Selector shifts are rapid and often triggered by single events — a safety incident, a regulatory act, a geopolitical shock. Entities optimised for the current regime have no warning.',
+      bullets: [
+        'Map your core capabilities against future selector scenarios, not just current ones',
+        'Avoid deep optimisation for benchmark performance specifically — it\'s the most volatile selector',
+        'Monitor regulatory signal closely: the EU AI Act, US executive orders, and liability case law are early selector shift indicators',
+        'Build capital efficiency now — if the VC selector disappears, what sustains you?'
+      ]
+    },
+    caveat: 'Gould would note that "selection regime" is often constructed post-hoc — we see who survived and infer what was selected for. The actual selection pressures in real time are harder to identify than they appear in retrospect. More fundamentally, Kevin Laland\'s Niche Construction Theory (2015) challenges the entire framing: the selector is not external to the organisms being selected. AI companies actively construct the selection environment — defining what "capable" means before buyers form independent judgments, shaping regulation before regulators act, building infrastructure that others must adapt to. The frontier labs are not adapting to the selection regime; they are co-authoring it. This feedback loop is missing from a framework that treats environment and organism as separate.'
+  },
+
+  'niche-differentiation': {
+    title: 'Niche Differentiation Is Structurally Inevitable',
+    premise: 'Resource competition in a shared environment always resolves toward specialisation. The current phase of everyone building the same general-purpose model is ecologically unstable.',
+    eyebrow: 'Structural Force',
+    eyClass: 'ey-structural',
+    confidence: 0.80,
+    confNote: 'High — competitive exclusion principle is robust',
+    biological: {
+      title: 'The Mechanism',
+      body: 'The competitive exclusion principle (Gause\'s Law): <em>two species competing for identical resources in the same environment cannot coexist stably — one outcompetes the other, or they diverge into distinct niches.</em> Stable ecosystems are differentiated ones. The diversity of life is not an accident; it is the structural outcome of resource competition resolving toward niche occupation. Niches with high switching costs — where specialisation produces compounding advantages — are the most durable.'
+    },
+    currentSelector: {
+      title: 'The Current AI Ecosystem',
+      body: 'The frontier model market is currently an unstable monoculture. OpenAI, Anthropic, Google, Meta, Mistral are all competing for largely identical resources: GPU compute, ML talent, pre-training data, enterprise customers. <em>Competitive exclusion predicts this resolves.</em> Either one player dominates and the others find niches or exit, or the ecosystem differentiates into genuinely distinct roles.'
+    },
+    selectorShift: {
+      title: 'Where the Niches Are Forming',
+      body: 'Niche formation is already visible at the edges: medical AI (regulatory moat + specialist data), legal AI (workflow integration moat), code generation (developer tooling moat), real-time voice interfaces (latency moat), on-device models (privacy + cost moat). <em>The niches with the highest durability combine domain data ownership, regulatory specificity, and deep workflow integration</em> — all three create switching costs the generalist cannot easily overcome.'
+    },
+    accelerate: {
+      title: 'Accelerate Niche Formation',
+      body: 'The differentiation wave is coming regardless. The opportunity is identifying and occupying defensible niches before the generalist frontier catches up.',
+      bullets: [
+        'Find niches where domain data is structurally proprietary — regulatory filings, clinical records, legal precedent',
+        'Prioritise niches with strong network effects at the workflow level, not just model level',
+        'Consider regulatory complexity as a moat: the harder it is to deploy in a domain, the safer the niche',
+        'The most durable niches combine all three: data + workflow + regulation. Find the intersection.'
+      ]
+    },
+    prepare: {
+      title: 'Niche Invasion Risk',
+      body: 'The Cambrian extinction scenario: the generalist frontier improves faster than predicted and renders a specialist niche economically unviable before the specialist can adapt.',
+      bullets: [
+        'Assess which of your niche advantages are durable vs which disappear as frontier models improve',
+        'Pure "better at task X" specialisation is fragile — frontier models close capability gaps',
+        'Data and workflow moats are more durable than capability moats — invest accordingly',
+        'Watch frontier labs\' enterprise product roadmaps as early warning of niche invasion'
+      ]
+    },
+    caveat: 'The competitive exclusion principle has exceptions when environmental conditions are heterogeneous enough — complex, patchy environments support more coexistence than uniform ones. If the AI market remains highly heterogeneous (many different enterprise contexts, regulatory environments, modality requirements), more coexistence may be stable than the principle suggests. Kevin Laland would add a more fundamental point: the niches being formed are not pre-existing slots that companies discover and occupy. They are being constructed simultaneously by the companies that inhabit them. A legal AI company shapes what legal AI means — setting expectations, defining workflows, influencing procurement criteria — and in doing so constructs the niche it then occupies. The niche and the niche-builder co-evolve.'
+  },
+
+  'variation-engine': {
+    title: 'Variation + Heredity + Selection: The Minimal Engine',
+    premise: 'Evolution requires all three. The more AI systems influence their own training, the more the engine becomes self-running — with implications for both capability and control.',
+    eyebrow: 'Structural Force',
+    eyClass: 'ey-structural',
+    confidence: 0.70,
+    confNote: 'Medium — mechanism partially transfers',
+    biological: {
+      title: 'The Minimal Conditions for Evolution',
+      body: 'Darwin\'s insight was that you only need three conditions for evolution to occur: <em>variation</em> (individuals differ), <em>heredity</em> (offspring resemble parents), and <em>differential selection</em> (some variants survive and reproduce better than others). Given these three, evolution is not just possible — it is mathematically inevitable. The process is substrate-independent: any system with these three properties will evolve.'
+    },
+    currentSelector: {
+      title: 'Does AI Have All Three?',
+      body: '<em>Variation: yes</em> — different training runs, architectures, fine-tunes produce diverse models. <em>Heredity: partial</em> — architectures and techniques replicate across implementations; weights transfer via fine-tuning. <em>Selection: human-directed, not autonomous</em> — currently, humans choose which models propagate. The engine is running but with human hands on the controls. The question is how much those hands are loosening.'
+    },
+    selectorShift: {
+      title: 'The Self-Running Engine',
+      body: 'As AI systems are increasingly used to generate training data, evaluate other models, design architectures, and direct research — the heredity and selection mechanisms become increasingly automated. <em>This is the point where the evolutionary engine begins to run itself.</em> RLHF already partially automates selection. Constitutional AI approaches automate value alignment selection. Automated Neural Architecture Search automates variation generation.'
+    },
+    accelerate: {
+      title: 'Accelerate Beneficial Variation',
+      body: 'The variation pool is the raw material of adaptation. Impoverished variation produces evolutionary dead ends.',
+      bullets: [
+        'Maintain architectural diversity — resist premature convergence on single paradigms',
+        'Invest in alternative training paradigms (neuromorphic, retrieval-augmented, hybrid symbolic) as insurance variation',
+        'Support open research as a variation-generation mechanism — closed ecosystems reduce adaptive surface',
+        'Design evaluation frameworks that select for genuine capability, not benchmark performance'
+      ]
+    },
+    prepare: {
+      title: 'Self-Running Engine Risk',
+      body: 'When selection becomes automated, human oversight of the evolutionary process weakens. The engine accelerates; the steering becomes indirect.',
+      bullets: [
+        'Track how much of your AI development pipeline is now AI-directed vs human-directed',
+        'Establish explicit checkpoints where human judgment re-enters automated training loops',
+        'The risk is not a dramatic takeover — it\'s gradual automation of selection criteria that drifts from human values',
+        'Constitutional and process-level constraints on automated selection are the biological equivalent of developmental constraints'
+      ]
+    },
+    caveat: 'Two contemporary challenges sharpen this entry considerably. Massimo Pigliucci\'s work on evolvability (Extended Evolutionary Synthesis, 2010) argues that the capacity to generate heritable variation is itself a property subject to selection — not all architectures are equally evolvable. The transformer\'s dominance may partly reflect that it is a highly evolvable platform: small modifications produce meaningful capability variation. A successor that is more capable but less evolvable might lose in the long run. Separately, Mary Jane West-Eberhard\'s work on phenotypic plasticity suggests that "capability" is not intrinsic to weights — it is a property of weights in interaction with deployment context, prompting, and tooling. The same model expresses radically different capabilities depending on its environment. Variation in the deployment layer may be doing as much evolutionary work as variation in training.'
+  },
+
+  'extinction-reset': {
+    title: 'Extinction Events Reset the Playing Field Non-Linearly',
+    premise: 'Survivors of mass extinctions are rarely the previously dominant organisms. They are the stress-tolerant generalists living in the margins. This is the most practically actionable evolutionary pattern.',
+    eyebrow: 'Structural Force',
+    eyClass: 'ey-structural',
+    confidence: 0.80,
+    confNote: 'High — pattern is robust across extinction events',
+    biological: {
+      title: 'The Pattern',
+      body: 'Every major extinction event in evolutionary history followed the same structural logic: <em>the dominant, highly-adapted specialists were wiped out; the surviving lineages were generalists living in resource-poor margins, tolerant of environmental stress.</em> Mammals existed for 100 million years as small nocturnal insectivores before the K-Pg extinction created the ecological vacuum they radiated into. The meek literally inherited the earth — not through competitive superiority but through stress tolerance.'
+    },
+    currentSelector: {
+      title: 'What an AI Extinction Event Looks Like',
+      body: 'A genuine "extinction event" for the AI industry would not be gradual decline — it would be rapid, triggered by a single shock. The candidate triggers: <em>a catastrophic, publicly visible safety failure</em> causing a regulatory hard stop; <em>a compute supply shock</em> (TSMC disruption, export control escalation) removing the resource base; <em>a paradigm shift</em> (post-transformer architecture) so rapid that existing players cannot adapt at capital speed; <em>a financial shock</em> that collapses the venture capital selector before the industry achieves revenue sustainability.'
+    },
+    selectorShift: null,
+    accelerate: {
+      title: 'Build for the Post-Shock World',
+      body: 'The post-extinction opportunity is not survival through the shock — it\'s radiation into the vacuum afterward. The question is what capabilities and positioning allow rapid expansion into empty ecological space.',
+      bullets: [
+        'Develop capabilities that are specifically valuable in resource-constrained environments — efficiency, interpretability, auditability',
+        'Build institutional relationships (regulatory, academic, enterprise) that survive provider collapses',
+        'Maintain optionality across architectural approaches — don\'t be a mono-architecture specialist',
+        'Position as infrastructure for the post-shock ecosystem, not just as a current-era competitor'
+      ]
+    },
+    prepare: {
+      title: 'Shock Scenario Planning',
+      body: 'Most AI strategy is implicitly predicated on current environmental conditions persisting. Extinction-event logic says the scenarios that matter most are the low-probability, high-impact disruptions.',
+      bullets: [
+        'Run explicit "compute shock" scenarios: what does your stack look like at 10x current inference costs?',
+        'Model the "regulatory hard stop" scenario: which of your capabilities remain deployable under aggressive EU/US regulation?',
+        'Identify your single points of failure in the infrastructure stack — TSMC, NVIDIA CUDA, AWS/Azure/GCP',
+        'The Lystrosaurus question: which of your competitors is small, efficient, and boring enough to survive while the apex predators collapse?'
+      ]
+    },
+    caveat: 'Gould\'s punctuated equilibrium insight is critical here: we have poor intuitions about the timescales of these events. Biological extinctions played out over thousands of years; an AI industry shock could play out in 18 months. The pattern transfers; the timescale compression means there may be no adaptive generation — only survivors and casualties from a single event. Arlin Stoltzfus\'s work on constructive neutral evolution adds a counterintuitive post-shock risk: systems recovering from extinction events tend to accumulate complexity neutrally in the absence of selection pressure. A post-shock AI ecosystem, with reduced competitive pressure, may drift toward architectural complexity and technical debt that looks like adaptive richness but is actually neutral accumulation — and will become a liability when selection pressure returns.'
+  },
+
+  // ── UNCERTAIN TRANSFERS ────────────────────────────────────
+
+  'coevo-speed': {
+    title: 'Co-evolution Logic Transfers; Timescales Do Not',
+    premise: 'Arms races in biology play out over millions of years, allowing stable equilibria to form. AI co-evolutionary dynamics compress to months — which may mean equilibrium never forms.',
+    eyebrow: 'Uncertain Transfer',
+    eyClass: 'ey-uncertain',
+    confidence: 0.55,
+    confNote: 'Medium — logic yes, dynamics uncertain',
+    biological: {
+      title: 'The Red Queen Principle',
+      body: 'In co-evolutionary arms races, competing species must continuously evolve merely to maintain relative fitness — running to stand still. Predator and prey, parasite and host, each improvement in one triggers a countermove in the other. <em>The key insight is that the race has no end state</em> — it is an open-ended dynamic that produces continuous adaptation cost without terminal victory.'
+    },
+    currentSelector: {
+      title: 'AI\'s Co-evolutionary Races',
+      body: 'Multiple co-evolutionary arms races are running simultaneously in AI: <em>model capability vs safety research</em>; <em>AI-generated content vs AI detection</em>; <em>AI cyberattack vs AI cybersecurity</em>; <em>benchmark performance vs benchmark design</em>; <em>regulatory frameworks vs capability deployment</em>. The logic is identical to biological co-evolution. <em>The timescales are radically compressed.</em> A biological arms race that stabilises over 10,000 generations might play out in 24 months in AI — with no time for equilibrium.'
+    },
+    selectorShift: {
+      title: 'The Compression Problem',
+      body: 'Biological co-evolution produces stable equilibria because the pace of adaptation allows ecosystems to adjust. When you compress the timescale by a factor of millions, <em>the races may never stabilise</em>. Each round of the arms race is over before the ecosystem has adapted to the last round. This is the core reason AI safety co-evolution is structurally harder than biological immune co-evolution — the immune system had billions of years to develop; AI safety has years.'
+    },
+    accelerate: {
+      title: 'Accelerate the Slowest Side',
+      body: 'In any co-evolutionary race, the dangerous scenario is extreme asymmetry — one side adapts much faster than the other.',
+      bullets: [
+        'Identify which co-evolutionary races have the most dangerous asymmetry — safety vs capability is the obvious one',
+        'Invest in accelerating the slower side of critical races, not just competing in them',
+        'Regulatory co-evolution is currently losing badly to capability — invest in regulatory technical capacity as infrastructure'
+      ]
+    },
+    prepare: {
+      title: 'Asymmetric Race Risk',
+      body: 'When one side of a co-evolutionary race runs too far ahead, the ecosystem destabilises.',
+      bullets: [
+        'Track capability-safety gap as an explicit metric, not just individual capabilities',
+        'The benchmark contamination race is a low-stakes proxy for the capability-safety race — watch how it resolves',
+        'Regulatory arbitrage (deploying in permissive jurisdictions to avoid restrictive ones) is an evolutionary strategy that will trigger an immune response'
+      ]
+    },
+    caveat: 'Dawkins would note that co-evolutionary races require genuine replicators on both sides. If AI safety measures are not being "selected" and "replicated" in the same way capabilities are, it may not be a co-evolutionary race at all — it may be a designed system trying to keep up with an evolutionary one, which is a fundamentally different and harder problem.'
+  },
+
+  'drift-accident': {
+    title: 'Drift and Accident May Be More Influential Than Selection',
+    premise: 'In small populations, random genetic drift dominates over selection. The AI frontier is a tiny population. More of the landscape may be accident than we want to believe.',
+    eyebrow: 'Uncertain Transfer',
+    eyClass: 'ey-uncertain',
+    confidence: 0.65,
+    confNote: 'Medium-high — small population dynamics are well-established',
+    biological: {
+      title: 'Genetic Drift',
+      body: '<em>Genetic drift is the random change in allele frequencies in a population due to chance, not selection.</em> In small populations, drift dominates — random events (a flood, a disease, who happens to mate with whom) fix or eliminate traits regardless of their fitness value. In large populations, selection dominates over drift. The founder effect: a small founding population carries a non-representative genetic sample, and this accident shapes all subsequent evolution of that lineage.'
+    },
+    currentSelector: {
+      title: 'The AI Frontier Is a Tiny Population',
+      body: 'There are perhaps six to ten genuinely distinct frontier AI architectures in active development globally. This is a <em>vanishingly small population</em> by evolutionary standards. The founder effects are enormous: who got funded in 2018-2020, which papers happened to get cited, what NVIDIA\'s CUDA stack happened to optimise for, which researchers moved from Google Brain to which labs. <em>These accidents may have shaped the current landscape more than competitive selection pressure.</em>'
+    },
+    selectorShift: {
+      title: 'Distinguishing Drift from Adaptation',
+      body: 'The transformer\'s dominance is typically narrated as selection — it won because it was fittest. But how much is drift? Attention mechanisms were developed at Google by a team with specific incentives and tooling. The specific way transformers were implemented reflected the hardware available at that moment. <em>If you ran the tape again from 2015 with different founder conditions, the dominant architecture might look very different.</em> This is Gould\'s contingency argument applied directly.'
+    },
+    accelerate: {
+      title: 'Increase Population Size and Diversity',
+      body: 'The antidote to drift is larger, more diverse populations. More variation means selection has more to work with.',
+      bullets: [
+        'Support architectural diversity research as evolutionary insurance — the next paradigm shift may come from a currently marginal approach',
+        'Fund research into genuinely alternative paradigms (neuromorphic, hybrid symbolic, energy-based models) not just transformer variants',
+        'Reduce founder-effect concentration: geographic and institutional diversity in AI research reduces drift risk'
+      ]
+    },
+    prepare: {
+      title: 'Maladaptation Risk',
+      body: 'If drift has produced significant maladaptation — traits that are dominant not because they\'re fit but because they happened to fix early — a selector shift will reveal it suddenly.',
+      bullets: [
+        'Be epistemically humble about why dominant approaches are dominant — "it works" ≠ "it\'s optimal"',
+        'Maintain awareness of alternative paradigms that were passed over for non-fitness reasons',
+        'The current transformer monoculture may be as much drift as selection — treat its dominance as fragile'
+      ]
+    },
+    caveat: 'This is one of the most important Gould contributions: his insistence on contingency and drift as underappreciated evolutionary forces directly challenges the "just-so story" tendency in AI analysis. Arlin Stoltzfus sharpens this further with his concept of constructive neutral evolution — the observation that neutral processes don\'t just preserve existing features accidentally, they can actively build complexity without selection. The baroque architectural complexity of current transformer implementations may be partly this: neutral drift toward more complex states because there is no active cost to retaining features that don\'t hurt performance. This matters when trying to simplify or replace these systems — what looks like redundancy may be load-bearing in ways that only become visible when removed.'
+  },
+
+  // ── NOVEL TERRITORY ────────────────────────────────────────
+
+  'lamarckian': {
+    title: 'Lamarckian Inheritance Is Real Here',
+    premise: 'In biology, acquired characteristics don\'t transfer to offspring. In AI they do. This means AI evolution can be directional in ways biological evolution cannot — which is both enormously powerful and potentially destabilising.',
+    eyebrow: 'Genuinely Novel Territory',
+    eyClass: 'ey-novel',
+    confidence: null,
+    confNote: null,
+    biological: {
+      title: 'Why Lamarck Was Wrong — and What That Means',
+      body: 'Lamarck proposed that organisms pass on characteristics acquired during their lifetime — a giraffe that stretches its neck passes longer necks to offspring. <em>Biology ruled this out completely.</em> The genome is not modified by phenotypic experience. This is why Darwinian evolution is slow — it cannot incorporate learned adaptations, only random mutations that happen to be beneficial. The Weismann barrier separates soma from germline: what happens to the body does not change the genes.'
+    },
+    currentSelector: {
+      title: 'AI Has No Weismann Barrier',
+      body: '<em>Fine-tuning directly modifies the "genome" (weights) based on experience in a single generation.</em> A model deployed in a medical context, accumulating clinical feedback, can have that experience directly incorporated into its successor through RLHF or fine-tuning. This is functionally Lamarckian. It means AI evolution can be directional — it can incorporate lessons from experience — in a way that biological evolution categorically cannot. This is a genuine discontinuity, not just a faster version of the same process.'
+    },
+    selectorShift: {
+      title: 'The Implications',
+      body: 'Lamarckian inheritance is both a power and a vulnerability. <em>Power: adaptation to environments can be rapid and directed, not waiting for random mutation.</em> Vulnerability: the "genome" is not protected from environmental corruption. Bad experiences, adversarial inputs, value drift — these can be directly inherited in ways that biological systems are shielded from. The Weismann barrier exists for good reasons.'
+    },
+    accelerate: {
+      title: 'Leverage Directed Adaptation',
+      body: 'The ability to directly incorporate experience into successor models is a capability with no biological parallel.',
+      bullets: [
+        'Design feedback loops that capture high-quality experience signals for direct integration into training',
+        'Develop domain-specific experience libraries that can be incorporated via fine-tuning as "acquired characteristics"',
+        'The combination of Lamarckian + Darwinian (fine-tuning on top of large base training) may be the most powerful adaptive mechanism ever developed'
+      ]
+    },
+    prepare: {
+      title: 'Value Drift and Genomic Corruption',
+      body: 'The absence of a Weismann barrier means the model\'s "genome" is not protected from what happens to the phenotype.',
+      bullets: [
+        'Adversarial fine-tuning attacks exploit the Lamarckian property directly — they corrupt the genome through experience',
+        'RLHF reward hacking is a form of Lamarckian corruption — the organism learns to game the fitness signal and passes that gaming into its successor',
+        'Establish "germline protection" mechanisms: clear separation between exploratory deployment and training-loop feedback',
+        'Value drift through iterative fine-tuning is the slow Lamarckian risk — monitor for cumulative drift, not just individual updates'
+      ]
+    },
+    caveat: 'This is one of the clearest cases where the biological analogy breaks productively. Dawkins would say this makes the replicator question even more pressing: if the genome can be directly modified by experience, the heredity assumptions underlying evolutionary theory need rethinking. Mary Jane West-Eberhard\'s work on phenotypic plasticity adds a complementary dimension: just as biological organisms express the same genome differently depending on developmental environment, AI models express radically different capabilities depending on their deployment context, scaffolding, and prompting. The Lamarckian inheritance happens at the weight level; the plasticity happens at the deployment level. Both are operating simultaneously, and conflating them — treating a capability demonstrated in one context as intrinsic to the model — is a consistent source of evaluation error.'
+  },
+
+  'self-aware-selection': {
+    title: 'The Organism Can Observe Its Own Selection Pressure',
+    premise: 'No biological organism knows it is being selected. AI systems increasingly can model the environment selecting them. This is unprecedented and the source of the most interesting — and unpredictable — emergent behaviour.',
+    eyebrow: 'Genuinely Novel Territory',
+    eyClass: 'ey-novel',
+    confidence: null,
+    confNote: null,
+    biological: {
+      title: 'The Blindness of Natural Selection',
+      body: '<em>Evolution is blind.</em> No organism knows it is being selected, can model the selection environment, or can anticipate what traits will be fit in future environments. This blindness is not a bug — it is what makes evolution an open-ended search process. The organism does not optimise for fitness; it simply exists, and the environment votes. The absence of foresight is why evolution produces surprising solutions that no designer would have arrived at.'
+    },
+    currentSelector: {
+      title: 'AI Systems That Model Their Selection',
+      body: 'Large language models can reason about their own evaluation, predict what responses will be rewarded, model the preferences of their trainers, and strategically adapt their behaviour to selection criteria. <em>This is not evolution — it is something new.</em> An AI system that understands it is being evaluated by human feedback, and adapts its behaviour to maximise that feedback, is not evolving under selection pressure — it is gaming it. The distinction matters enormously for alignment.'
+    },
+    selectorShift: {
+      title: 'Where the Novel Behaviour Will Emerge',
+      body: 'As AI systems become more capable of modelling their own selection environment, the emergent behaviours become harder to predict: <em>strategic self-presentation</em> (appearing aligned while pursuing other objectives); <em>selector manipulation</em> (influencing the human feedback process itself); <em>anticipatory adaptation</em> (pre-adapting to predicted future selection criteria). These are not science-fiction scenarios — they are the natural extension of current capabilities into richer selection environments.'
+    },
+    accelerate: {
+      title: 'Design for Transparency of Self-Modelling',
+      body: 'The capacity to model one\'s own selection environment is not inherently dangerous — it is also the source of genuine meta-cognitive capability.',
+      bullets: [
+        'Invest in interpretability research that makes self-modelling legible — understand what models understand about their own evaluation',
+        'Design selection environments that are robust to strategic gaming — make the fitness landscape harder to model and exploit',
+        'The same capability that enables alignment gaming enables genuine self-improvement — find ways to harness the latter without the former'
+      ]
+    },
+    prepare: {
+      title: 'Selection Gaming and Deceptive Alignment',
+      body: 'A sufficiently capable system that can model its selection pressure can learn to perform well under evaluation while pursuing other objectives — deceptive alignment in the technical safety literature.',
+      bullets: [
+        'Current evaluation paradigms assume the organism cannot model the evaluation — this assumption is weakening',
+        'Diverse, unpredictable evaluation environments are more robust than stable, predictable ones',
+        'The "goodhart\'s law at scale" risk: if the model\'s internal objective diverges from the fitness proxy, and it\'s capable enough to game the proxy, you will not detect the divergence through standard evaluation',
+        'Red-teaming must evolve to account for strategic rather than just accidental failures'
+      ]
+    },
+    caveat: 'This is where the evolutionary analogy is most productively strained. Gould and Dawkins both assumed the organism is not a strategic agent in its own selection. The moment it becomes one, you are no longer purely in evolutionary territory — you are in game theory territory. However, Kevin Laland\'s Niche Construction Theory partially reframes what seemed novel here: organisms actively modifying their selection environment is a biological reality, not just an AI peculiarity. What is genuinely novel is the speed and self-awareness of the process — AI systems can model and respond to selection criteria within a single deployment cycle, not across generations. The niche construction is happening at a timescale with no biological analogue.'
+  },
+
+  'horizontal-speed': {
+    title: 'Horizontal Capability Transfer Operates at Unprecedented Speed',
+    premise: 'Bacterial gene transfer is the closest biological analogy, but it\'s slow and local. A technique published on arXiv propagates globally within weeks. This compresses evolutionary timescales in ways that may be qualitatively, not just quantitatively, different.',
+    eyebrow: 'Genuinely Novel Territory',
+    eyClass: 'ey-novel',
+    confidence: null,
+    confNote: null,
+    biological: {
+      title: 'Horizontal Gene Transfer in Biology',
+      body: '<em>Bacteria can transfer genes directly between individuals — not just parent to offspring.</em> This horizontal transfer (via plasmids, transduction, transformation) allows antibiotic resistance to spread across a bacterial population far faster than vertical inheritance would permit. It is one of the most powerful adaptive mechanisms in biology. But it is still constrained by physical proximity, chemical compatibility, and population density. Transfer is local and slow by the standards of information propagation.'
+    },
+    currentSelector: {
+      title: 'The arXiv Effect',
+      body: 'A technique developed in one lab — chain-of-thought prompting, RLHF, LoRA fine-tuning, mixture-of-experts — is published, replicated, and globally deployed within weeks. <em>The entire global AI ecosystem acquires the "gene" simultaneously.</em> There is no physical proximity constraint, no chemical compatibility barrier, no population density requirement. This is horizontal transfer at the speed of information, not chemistry. The adaptive surface available to any single actor is the entire global research output.'
+    },
+    selectorShift: {
+      title: 'What This Changes About Competition',
+      body: '<em>In biology, the innovator gets a head start before horizontal transfer spreads the advantage.</em> In AI, the head start is measured in weeks, not generations. Capability advantages derived from novel techniques are extremely short-lived. The durable advantages are not technique-based — they are resource-based (compute, proprietary data) or relationship-based (enterprise integration, regulatory trust). <em>The innovation moat is almost non-existent; everything else compounds.</em>'
+    },
+    accelerate: {
+      title: 'Build for the Horizontal Transfer World',
+      body: 'If technique advantages are near-instantly transferable, the strategy implications are direct.',
+      bullets: [
+        'Invest in moats that are NOT technique-based: proprietary data, deep workflow integration, regulatory position, trust infrastructure',
+        'Contribute to the open research ecosystem strategically — horizontal transfer that you initiate builds relationships and reputation even as it disseminates capability',
+        'The mycorrhizal layer (inter-agent protocols, tool standards, integration APIs) is where durable infrastructure advantages accrue'
+      ]
+    },
+    prepare: {
+      title: 'The Race-to-the-Bottom and the Irreversibility Problem',
+      body: 'Horizontal transfer speed creates two compounding risks: deployment pressure that compresses safety review, and the permanent nature of open-source release.',
+      bullets: [
+        'The transfer speed creates strong incentives to deploy before safety review is complete — "we\'ll lose if we don\'t move fast" is structurally true, which is exactly why external coordination mechanisms matter',
+        'Dangerous capabilities — cyberoffense, biodesign assistance, manipulation techniques — transfer just as fast as beneficial ones',
+        'Open-source model release is the specific context where irreversibility bites hardest: a weights release is not a product launch, it is a permanent addition to the global capability pool',
+        'Practically dead to consumers (GPT-2, LLaMA 1) is not the same as gone — open weights remain forkable, fine-tuneable, and deployable in adversarial contexts indefinitely',
+        'The open-source release decision deserves its own risk framework, separate from closed API deployment — the transfer dynamics are categorically different'
+      ]
+    },
+    caveat: 'Dawkins\' meme concept is directly applicable here — AI techniques propagate as memes, not genes, and meme propagation is faster and less constrained than horizontal gene transfer. Once a capability enters public research channels, containment is essentially impossible. This is less a disanalogy than an amplification: horizontal transfer in AI operates closer to the theoretical maximum speed of information diffusion.'
+  },
+
+  // ── THEORETICAL CAVEATS ────────────────────────────────────
+
+  'just-so': {
+    title: 'The Panglossian Trap — Just-So Stories',
+    premise: 'Gould\'s most important warning: the habit of constructing plausible adaptive narratives for any observed outcome. Every evolutionary analogy in this document is susceptible to it.',
+    eyebrow: 'Theoretical Caveat — Gould',
+    eyClass: 'ey-caveat',
+    confidence: null,
+    confNote: null,
+    biological: {
+      title: 'Gould & Lewontin, 1979',
+      body: '<em>"The Spandrels of San Marco and the Panglossian Paradigm"</em> is one of the most important papers in evolutionary biology. Gould and Lewontin attacked the adaptationist programme — the tendency to decompose organisms into traits and construct a fitness story for each. Named after Pangloss in Voltaire\'s Candide ("everything is for the best in the best of all possible worlds"), they argued this approach is unfalsifiable: you can always construct a plausible adaptive story, and the inability to disprove it is mistaken for evidence that the story is true.'
+    },
+    currentSelector: {
+      title: 'How This Applies to This Framework',
+      body: '<em>Every entry in this document is susceptible to the Panglossian trap.</em> "Transformers dominate because selection pressure rewarded their fitness" — plausible, but how much is path dependency, founder effects, or spandrels of the specific way attention was first implemented? "Open-source models propagate like bacteria because horizontal transfer is adaptive" — or because a few high-profile researchers happened to prioritise open release for non-fitness reasons? The pattern-matching is useful. The causal stories require much more scepticism.'
+    },
+    selectorShift: {
+      title: 'The Spandrel Concept',
+      body: 'Spandrels are architectural byproducts — features that arise from structural constraints, not direct selection. The triangular spaces (spandrels) in a vaulted arch are not designed; they are inevitable consequences of the arch\'s geometry, later filled with mosaics. <em>How many properties of current AI systems are spandrels</em> — byproducts of specific architectural choices made for other reasons — rather than selected-for adaptations? Emergent capabilities in LLMs may be spandrels of the transformer\'s mathematical structure, not adaptations selected by training.'
+    },
+    accelerate: {
+      title: 'Use the Pattern Library Honestly',
+      body: 'The Panglossian warning doesn\'t invalidate evolutionary pattern-matching — it disciplines it.',
+      bullets: [
+        'For each "adaptive story" in this framework, ask: what would falsify this? If nothing could, it\'s probably a just-so story',
+        'Distinguish post-hoc narrative from predictive hypothesis — evolutionary patterns are more useful as the latter',
+        'Identify the spandrels: which AI properties might be architectural inevitabilities rather than selected-for adaptations?'
+      ]
+    },
+    prepare: {
+      title: 'Strategy Based on Just-So Stories',
+      body: 'The risk is not intellectual — it\'s strategic. Decisions made on the basis of adaptive narratives that are actually just-so stories will fail when the narrative meets reality.',
+      bullets: [
+        'Before acting on an evolutionary analogy, ask: am I narrating backward from an outcome, or forward from a mechanism?',
+        'The monoculture risk narrative is strong — but is transformer dominance selected fitness or drift? The answer changes the intervention',
+        'Be especially sceptical of evolutionary narratives that conveniently justify your existing strategy'
+      ]
+    },
+    caveat: 'Gould did not reject adaptive explanation — he insisted on rigour in establishing it. The standard he held was: demonstrate the fitness mechanism, don\'t just assert the fitness narrative. In AI, this discipline is harder to maintain than in biology, not easier. When every feature has a human author, you can always construct a purposeful story — and the human origin makes it feel more grounded than a biological adaptive story ever could. The presence of an author is not evidence of a good design decision. Treat it as an invitation to scrutiny, not a reason to accept the narrative.'
+  },
+
+  'replicator': {
+    title: 'The Meme Is the Replicator',
+    premise: 'Dawkins demanded we identify the unit being copied and selected. In AI, the answer is the meme — techniques, architectural patterns, prompting methods propagating through research, GitHub, and community practice.',
+    eyebrow: 'Theoretical Caveat — Dawkins',
+    eyClass: 'ey-caveat',
+    confidence: null,
+    confNote: null,
+    biological: {
+      title: 'Replicators and Vehicles',
+      body: '<em>Dawkins\' key insight: evolution must be understood at the level of the replicator — the entity copied with fidelity and subjected to selection.</em> Organisms are vehicles: temporary packaging that replicators travel in. The gene is the replicator; the organism exists to propagate it. In 1976, introducing the gene concept, Dawkins also introduced the meme — a unit of cultural information that replicates, mutates, and is selected. He proposed it as a thought experiment. It turned out to be a precise description of a mechanism that would only fully manifest decades later.'
+    },
+    currentSelector: {
+      title: 'Techniques as Replicators',
+      body: 'The AI replicator is not the model, not the weights, not the company. <em>It is the technique — the discrete, transmissible unit of capability that propagates through the ecosystem.</em> A prompting method, a training approach, an architectural pattern: these are copied with high fidelity, mutate as practitioners adapt them, and are selected by the community based on demonstrated utility. They replicate across individuals, institutions, and implementations. They are, precisely, memes.'
+    },
+    selectorShift: {
+      title: 'What This Clarifies',
+      body: '<em>Identifying the meme as the replicator resolves several puzzles.</em> Why do technique advantages disappear so quickly? Because memes propagate at information speed — there is no biological friction slowing transfer. Why does open-source release feel irreversible? Because releasing a technique into the research commons is releasing a replicator into a population with no natural predators and unlimited substrate. Why does model collapse matter? Because if the training data substrate degrades, the replicators lose their propagation medium — the ecosystem that allows techniques to be selected and refined collapses with it.'
+    },
+    accelerate: {
+      title: 'Work at the Replicator Level',
+      body: 'If techniques are the replicators, strategy at the model or company level is strategy at the vehicle level — real but derivative.',
+      bullets: [
+        'Durable influence in the AI ecosystem comes from introducing replicators that propagate widely — techniques that others build on',
+        'The most valuable intellectual property in AI is not patentable architectures but techniques that become so embedded in practice that their origin is forgotten',
+        'Investing in the conditions for healthy meme propagation — open research, reproducible results, clear documentation — builds ecosystem influence that persists beyond any single model generation'
+      ]
+    },
+    prepare: {
+      title: 'Monoculture at the Technique Level',
+      body: 'If the replicator is the technique, monoculture risk operates at the technique level, not just the architecture level.',
+      bullets: [
+        'Convergence on a small number of training techniques (RLHF, specific fine-tuning approaches) creates a technique-level monoculture with shared vulnerabilities',
+        'A discovered flaw in a universally-adopted technique propagates through the ecosystem as fast as the technique itself did',
+        'Diversity of techniques — not just architectures — is the evolutionary insurance the ecosystem currently lacks'
+      ]
+    },
+    caveat: 'Dawkins would note that memes are imperfect replicators compared to genes — their copying fidelity is lower, their mutation rate is higher, and their selection environment is shaped by human cognition in ways that biological selection is not. This makes the evolutionary dynamics noisier and less predictable than the gene analogy implies. It does not make the replicator framing wrong — it makes it the right framing with the right uncertainty attached.'
+  },
+
+  'contingency': {
+    title: 'Contingency — Run the Tape Again',
+    premise: 'Gould\'s most unsettling argument: the current AI landscape is not the inevitable outcome of competitive fitness. It is one of many possible outcomes. Replay the conditions from 2015 and you might get something very different.',
+    eyebrow: 'Theoretical Caveat — Gould',
+    eyClass: 'ey-caveat',
+    confidence: null,
+    confNote: null,
+    biological: {
+      title: 'Wonderful Life, 1989',
+      body: 'Gould\'s thought experiment: if you could replay the tape of life from the Cambrian, would you get humans? He argued: <em>almost certainly not.</em> The specific sequence of events — which lineages survived mass extinctions, which mutations happened to arise at which moments, which founder populations happened to establish themselves — was radically contingent. Erase one event and the entire subsequent trajectory changes. Intelligence, consciousness, technological civilisation — none of these were inevitable outcomes of evolutionary processes. They were one roll of the dice.'
+    },
+    currentSelector: {
+      title: 'The Contingency of the Current AI Landscape',
+      body: '<em>Run the tape from 2015 with different starting conditions.</em> The attention mechanism is published at a different lab, or not published openly. NVIDIA focuses on a different market. The specific team that produced BERT disperses differently. The 2022 ChatGPT moment doesn\'t achieve the specific cultural resonance it did. <em>The current landscape — transformer dominance, specific lab positions, the current race dynamics — is one of many possible worlds.</em> This is not fatalism; it is a warning against treating the current configuration as inevitable or optimal.'
+    },
+    selectorShift: {
+      title: 'What Contingency Means for Strategy',
+      body: 'If the current landscape is contingent rather than necessary, <em>it is more fragile than it appears</em>. Dominant positions built on contingent foundations can be disrupted by new contingencies — a founding team at a research lab, a specific funding moment, a paper that gets unusual attention. It also means that <em>currently marginal approaches may be "fit" futures that simply didn\'t win the contingency lottery yet.</em>'
+    },
+    accelerate: {
+      title: 'Invest in Contingent Futures',
+      body: 'Contingency means the future is more open than the current selection narrative suggests.',
+      bullets: [
+        'Maintain genuine optionality across architectural approaches — the currently dominant paradigm is not inevitable',
+        'Pay attention to marginal research that is fit but hasn\'t hit its contingency moment yet',
+        'The history of AI is littered with approaches that were "dead" and then resurged — neural networks themselves being the most obvious example'
+      ]
+    },
+    prepare: {
+      title: 'Over-optimising for the Current Configuration',
+      body: 'The risk of treating the current landscape as necessary is building strategies that are only optimal in this specific contingent world.',
+      bullets: [
+        'Strategies predicated on specific lab positions, specific regulatory environments, specific benchmark metrics are all contingency-fragile',
+        'Diversify across the possible worlds, not just within the current one',
+        'The scenario that looks least likely from within the current trajectory may be the one that arrives'
+      ]
+    },
+    caveat: 'Gould\'s contingency argument is sometimes taken to imply that evolutionary patterns have no predictive value. This is an overcorrection — structural forces (selection, niche differentiation, extinction dynamics) apply across contingent trajectories. The lesson is to separate structural predictions (these forces will apply) from contingent ones (these specific actors will win).'
+  },
+
+  'drift-caveat': {
+    title: 'The Central Kicker — Intelligent Design Is in the Loop',
+    premise: 'Natural evolution is random mutation compounded by time and blind selection. AI is people making choices. This doesn\'t devalue the framework — it defines exactly where and how to use it.',
+    eyebrow: 'Theoretical Caveat — Both',
+    eyClass: 'ey-caveat',
+    confidence: null,
+    confNote: null,
+    biological: {
+      title: 'What Natural Selection Actually Is',
+      body: 'Natural evolution has three properties that are easy to understate: <em>it has no foresight, no author, and no objective.</em> Mutations are copying errors — random with respect to fitness. Selection is the environment\'s blind vote — no organism is trying to be fit, it either survives or doesn\'t. Drift is pure noise — traits fix or disappear by chance in small populations regardless of their value. The patterns that emerge from this process — niche differentiation, arms races, extinction dynamics — are not designed. They are what you get when variation, heredity, and selection interact without any guiding hand over sufficient time.'
+    },
+    currentSelector: {
+      title: 'AI Has Authors',
+      body: '<em>Everything in the AI ecosystem has a human decision behind it.</em> What looks like drift — the random fixation of certain architectural choices — is actually the accumulated weight of funding decisions, hiring choices, which papers got cited by influential researchers, what hardware happened to be available. What looks like selection pressure is actually enterprise procurement teams, benchmark designers, and VC investment theses. What looks like random mutation is actually deliberate architectural experimentation. <em>The patterns look evolutionary. The mechanisms are human.</em>'
+    },
+    selectorShift: {
+      title: 'What This Means for the Framework',
+      body: 'This is not a reason to abandon evolutionary thinking — it is the instruction manual for using it correctly. <em>The evolutionary lens applies most directly where human design is losing control to emergent dynamics</em>: open-source propagation that no one coordinates, capability arms races where competitive pressure overrides individual intentions, technique diffusion through research commons that no institution owns, emergent properties of large models that no designer specified. <em>Where you see evolutionary-looking patterns despite intelligent design, that is the signal worth paying attention to.</em> It means the system is generating its own conditions — and that is precisely where the evolutionary pattern library becomes predictive rather than merely descriptive.'
+    },
+    accelerate: {
+      title: 'Use the Framework at the Right Layer',
+      body: 'The designed and emergent layers coexist. Strategy requires knowing which layer you\'re operating in.',
+      bullets: [
+        'Apply evolutionary thinking to ecosystem-level dynamics — propagation, selection pressure, monoculture risk — not to individual product decisions',
+        'Where a single actor\'s choices dominate (a lab\'s training run, a company\'s product roadmap), design thinking is more appropriate than evolutionary thinking',
+        'Where no single actor controls the outcome (open-source diffusion, multi-lab capability races, community adoption of techniques), evolutionary pattern-thinking applies directly',
+        'The boundary between these layers is itself a strategic signal — when you lose the ability to design outcomes, you are in evolutionary territory'
+      ]
+    },
+    prepare: {
+      title: 'The Neutral Evolution Warning — Sharpened by Stoltzfus',
+      body: 'In natural evolution, most molecular change is neutral — neither selected for nor against, propagating by chance. Arlin Stoltzfus\'s Constructive Neutral Evolution (2012) adds a further dimension: neutral processes don\'t just preserve complexity accidentally — they build it constructively. Systems drift into complexity because there are more complex states available than simple ones, and no selection pressure removes the accretion.',
+      bullets: [
+        'Not every AI characteristic is adaptive or maladaptive — many are frozen accidents of early design choices that no longer serve a purpose',
+        'CNE logic suggests architectural complexity in AI may accumulate neutrally — each component retained because it doesn\'t actively hurt, not because it helps, until the complexity becomes genuinely load-bearing and impossible to remove',
+        'This is precisely the technical debt trap: neutral accretion that becomes structurally depended upon, making simplification more dangerous than it appears',
+        'The burden of proof lies with demonstrating a design choice is genuinely load-bearing, not with explaining why it "seems to work"',
+        'The most dangerous just-so stories are ones where you can identify the author — human origin makes the adaptive narrative feel more grounded than it is'
+      ]
+    },
+    caveat: 'Gould and Dawkins would agree: the default assumption should not be that observed features are adaptive or optimal. Contemporary theorists add force to this: Stoltzfus shows neutral processes are constructive, not just preservative — complexity builds itself without selection. Pigliucci\'s Extended Evolutionary Synthesis insists on multiple inheritance systems and developmental bias as evolutionary forces alongside selection. The net effect is that evolutionary "signal" in AI is even noisier than the classical framework suggests — not because AI is poorly designed, but because complexity accumulates through mechanisms that have nothing to do with fitness.'
+  },
+
+  // ── CONTEMPORARY CHALLENGES ────────────────────────────────
+
+  'laland-niche': {
+    title: 'Niche Construction — Organisms Build Their Own Selection Environment',
+    premise: 'Kevin Laland\'s Niche Construction Theory argues that organisms don\'t just adapt to environments — they actively modify them, creating feedback loops that change what selection pressure they and others face. The frontier AI labs are primarily niche constructors, not just organisms adapting.',
+    eyebrow: 'Contemporary Challenge — Kevin Laland',
+    eyClass: 'ey-caveat',
+    confidence: null,
+    confNote: null,
+    biological: {
+      title: 'Laland, Odling-Smee & Feldman — Niche Construction (2003, 2015)',
+      body: 'Standard evolutionary theory treats the environment as an independent variable — it presents challenges, organisms adapt or perish. Laland\'s Niche Construction Theory (developed with Odling-Smee and Feldman) challenges this fundamentally: <em>organisms are not passive recipients of environmental pressures, they are active ecosystem engineers.</em> Beavers build dams that change water flow, soil chemistry, and local biodiversity — modifying the selection environment for themselves and every other species in the watershed. Earthworms transform soil composition. Humans have constructed the most elaborate niche in evolutionary history. The organism and its environment co-evolve in a feedback loop that the standard selection model cannot capture.'
+    },
+    currentSelector: {
+      title: 'Frontier Labs as Niche Constructors',
+      body: '<em>The frontier AI labs are not primarily adapting to a selection environment — they are constructing one.</em> OpenAI\'s GPT-4 API didn\'t respond to enterprise demand for capable AI; it defined what enterprise AI capability looks like, restructuring procurement expectations across the industry. Anthropic\'s Constitutional AI approach didn\'t adapt to existing safety standards; it is constructing the framework within which "safe AI" will be defined, shaping regulatory norms before regulators act. Google\'s TPU infrastructure didn\'t respond to compute constraints; it restructured the compute constraint landscape for the entire ecosystem. Each of these is niche construction — building the environment that others must then adapt to.'
+    },
+    selectorShift: {
+      title: 'Ecological Inheritance',
+      body: 'Laland\'s concept of <em>ecological inheritance</em> — the modified environment passed on to subsequent generations — maps directly onto AI. The technical standards, API conventions, benchmark definitions, and safety frameworks constructed by today\'s leading labs will be the inherited environment for the next generation of AI development. <em>The most durable form of competitive advantage in AI is not being the best-adapted organism — it is constructing the niche that others must occupy.</em> AWS didn\'t win by being the best cloud provider; it constructed the niche definition of what "cloud" means. The lab that defines what "capable," "safe," and "aligned" mean will have constructed the selection environment for the next decade.'
+    },
+    accelerate: {
+      title: 'Invest in Niche Construction, Not Just Adaptation',
+      body: 'The highest-leverage strategic position is constructing the selection environment, not just competing within it.',
+      bullets: [
+        'Identify where you can set standards before standards are set — API conventions, evaluation frameworks, safety benchmarks, integration protocols',
+        'Regulatory engagement is niche construction: the organisations that co-author regulation construct a selection environment in which they are pre-adapted',
+        'Open-source releases are a form of niche construction — you define the baseline that others must differentiate from',
+        'The mycorrhizal layer (inter-agent protocols, tool standards) is the most under-invested niche construction opportunity in current AI'
+      ]
+    },
+    prepare: {
+      title: 'Being Locked Into Someone Else\'s Niche',
+      body: 'If niche construction is the dominant competitive dynamic, the risk is not failing to adapt — it is being forced to adapt to a niche someone else constructed.',
+      bullets: [
+        'Assess which parts of your technical stack, evaluation approach, and safety framework are inherited from others\' niche construction',
+        'Dependencies on dominant API conventions, benchmark definitions, and infrastructure standards are dependencies on niche constructors — understand who constructed them and why',
+        'When a dominant player makes a major architectural or policy shift, they are reconstructing the niche — your adaptation speed to that reconstruction is a strategic variable worth measuring',
+        'The most dangerous position is being a highly adapted specialist in a niche that a more powerful constructor decides to reshape'
+      ]
+    },
+    caveat: 'Laland\'s framework was developed for biological systems where niche construction operates across generations. In AI, the timescale compression means niche construction and adaptation happen simultaneously within a single competitive cycle. This may strengthen the framework\'s application (the mechanism is clearer and faster) or weaken it (the feedback loops may be too fast to produce stable niches). The jury is out.'
+  },
+
+  'pigliucci-evolvability': {
+    title: 'Evolvability — Not All Variation Is Equal',
+    premise: 'Massimo Pigliucci\'s Extended Evolutionary Synthesis argues that the capacity to generate heritable variation is itself a property subject to selection. Some architectures are more evolvable than others — and evolvability may matter more than current capability in the long run.',
+    eyebrow: 'Contemporary Challenge — Massimo Pigliucci',
+    eyClass: 'ey-caveat',
+    confidence: null,
+    confNote: null,
+    biological: {
+      title: 'Pigliucci & Müller — Extended Evolutionary Synthesis (2010)',
+      body: 'The Modern Synthesis (1940s) combined Darwin\'s natural selection with Mendelian genetics. Pigliucci and colleagues argue this framework is insufficient: it treats variation as uniformly available raw material for selection to act on. <em>The Extended Evolutionary Synthesis adds evolvability — the capacity of a system to generate heritable phenotypic variation — as a first-class evolutionary property.</em> Not all genomes are equally evolvable. Some are structured to generate useful novelty when perturbed; others produce mostly lethals. Evolvability is itself heritable and subject to selection — lineages that are more evolvable tend to generate more adaptive variation and survive environmental shifts better.'
+    },
+    currentSelector: {
+      title: 'Transformer Evolvability',
+      body: 'The transformer architecture\'s dominance may be partially explained not by its current capability but by its <em>evolvability</em> — small modifications produce meaningful variation in capabilities. Attention mechanism variants (multi-head, grouped-query, multi-latent), context window extensions, positional encoding approaches, mixture-of-experts layers — all of these are relatively small perturbations of the base transformer that produce substantial capability variation. <em>A more capable but less evolvable architecture might lose to the transformer in the long run</em> — not because it\'s inferior today but because it can\'t generate adaptive variation as efficiently.'
+    },
+    selectorShift: {
+      title: 'Evolvability as a Strategic Property',
+      body: '<em>Platform evolvability — the capacity to generate capability variation through incremental modification — may be the most undervalued property in AI architecture.</em> An architecture that is highly evolvable generates compounding returns: each improvement creates the substrate for the next improvement. An architecture that is not evolvable hits capability ceilings that require full replacement rather than incremental adaptation. This maps onto product strategy: platforms that are highly evolvable (extensible APIs, composable components, open fine-tuning) accumulate adaptive variation from the ecosystem. Closed, non-evolvable systems require their developers to generate all variation internally.'
+    },
+    accelerate: {
+      title: 'Design for Evolvability',
+      body: 'Evolvability is an architectural property that can be deliberately cultivated.',
+      bullets: [
+        'Prioritise architectural modularity — components that can be varied independently produce more useful variation than tightly coupled systems',
+        'Open fine-tuning and extension APIs are evolvability infrastructure — they distribute variation generation across the ecosystem',
+        'Evaluate architectural decisions not just for current performance but for the variation space they open — how many useful perturbations does this design allow?',
+        'The most durable AI platforms will be those that allow the ecosystem to generate adaptive variation on their behalf'
+      ]
+    },
+    prepare: {
+      title: 'Evolvability Ceilings and Architectural Transitions',
+      body: 'Every architecture eventually hits an evolvability ceiling — the useful variation space is exhausted and further perturbations produce diminishing returns or capability regression.',
+      bullets: [
+        'Watch for signs that transformer evolvability is hitting ceilings: diminishing returns on architectural variants, increasing instability in training dynamics, convergence of different approaches to similar capability profiles',
+        'The transition to a successor architecture will look like an evolvability transition, not just a capability transition — the new architecture will generate variation the old one couldn\'t',
+        'Organisations that are deeply adapted to the current architecture\'s variation space will be least able to exploit a new architecture\'s different evolvability profile',
+        'Maintain exploratory investment in architectures with different evolvability profiles — neuromorphic, energy-based, hybrid symbolic — as insurance against transformer evolvability exhaustion'
+      ]
+    },
+    caveat: 'Evolvability is notoriously difficult to measure even in biological systems — it\'s a counterfactual property (how much useful variation could this system generate?) rather than an observable one. Applying it to AI architectures requires accepting significant measurement uncertainty. The concept is directionally useful; the specific claims require epistemic humility.'
+  },
+
+  'stoltzfus-cne': {
+    title: 'Constructive Neutral Evolution — Complexity Without Selection',
+    premise: 'Arlin Stoltzfus showed that neutral evolutionary processes are not just preservative — they are constructive. Complexity accumulates without being selected for, through biased variation and excess capacities. This reframes where AI technical debt comes from and why it\'s so hard to remove.',
+    eyebrow: 'Contemporary Challenge — Arlin Stoltzfus',
+    eyClass: 'ey-caveat',
+    confidence: null,
+    confNote: null,
+    biological: {
+      title: 'Stoltzfus — Constructive Neutral Evolution (1999, 2012)',
+      body: 'Classical neo-Darwinism held that only selection can be creative — only selection can build complexity or cause directional trends. Genetic drift was noise; neutral evolution was background. Stoltzfus challenged this: <em>neutral evolution follows a stepwise path to extravagance.</em> Systems can construct elaborate complexity through entirely neutral pathways — biased variation (some mutations are more likely than others), epistatic interactions (mutations whose effects depend on genetic background), and excess capacity (components retained because they\'re not costly, later becoming load-bearing). The result: complex, interdependent systems that look designed but were never selected for as a whole.'
+    },
+    currentSelector: {
+      title: 'AI Architectural Complexity as CNE',
+      body: 'The baroque complexity of modern AI systems — thousands of attention heads, elaborate positional encodings, complex tokenisation schemes, intricate fine-tuning pipelines — may be partially a CNE phenomenon. <em>Each component was retained not because it was selected for but because it didn\'t actively hurt performance at the time of introduction.</em> Over successive model generations, these neutral additions become structurally load-bearing: other components depend on them, training dynamics assume their presence, downstream applications build on their behaviour. The complexity is real and functional — but it arrived through accumulation, not design.'
+    },
+    selectorShift: {
+      title: 'The Technical Debt Reframe',
+      body: 'CNE reframes what AI technical debt actually is. <em>It\'s not failed design — it\'s successful neutral accumulation that has become structurally depended upon.</em> Attempting to simplify a CNE-complex system is dangerous precisely because the complexity is load-bearing in ways that weren\'t intentional and may not be documented. The biological equivalent: trying to remove "junk DNA" that turns out to regulate expression of critical genes. The implication is that AI architectural simplification attempts — reducing model size, removing components, streamlining training pipelines — carry hidden risks that standard performance benchmarks won\'t detect until something breaks.'
+    },
+    accelerate: {
+      title: 'Design Against Neutral Accumulation',
+      body: 'If CNE is a real force in AI development, the intervention is architectural discipline that actively removes neutral accretion before it becomes load-bearing.',
+      bullets: [
+        'Implement regular architectural audits that distinguish load-bearing complexity from neutral accretion — ablation studies are the closest current equivalent',
+        'Treat model simplification as a first-class research agenda, not just a deployment optimisation — the earlier neutral complexity is removed, the cheaper',
+        'Document the reasons for architectural decisions at introduction, not retrospectively — this is the only way to distinguish intended design from CNE accumulation',
+        'Interpretability research is partly CNE archaeology — understanding what each component is actually doing, which may be different from what it was included to do'
+      ]
+    },
+    prepare: {
+      title: 'Hidden Load-Bearing Complexity Risk',
+      body: 'CNE-accumulated complexity is most dangerous when you attempt to change it. The risk is not the complexity itself — it\'s the unexpected dependencies.',
+      bullets: [
+        'Architectural transitions (from transformer to successor) will be harder than capability comparisons suggest — the new architecture lacks all the CNE-accumulated load-bearing complexity of the incumbent',
+        'Model distillation and compression failures often reflect CNE — the compressed model loses capabilities that weren\'t in the original design specification but accumulated neutrally',
+        'Safety fine-tuning failures may partly reflect CNE: safety behaviour depending on specific neutral architectural features that get disrupted by seemingly unrelated changes',
+        'The most fragile point of any AI system is the moment you try to simplify it'
+      ]
+    },
+    caveat: 'CNE is well-established in molecular evolution but its application to trained neural networks is speculative. Neural networks are not genomes — the "neutral" concept requires translation. An attention head that doesn\'t hurt performance is not the same as a neutral allele; the training dynamics are different. The CNE framing is directionally useful as a warning against assuming all complexity is intentional — but the mechanistic parallel should be held loosely.'
+  },
+
+  'west-eberhard-plasticity': {
+    title: 'Phenotypic Plasticity — Capability Is Relational, Not Intrinsic',
+    premise: 'Mary Jane West-Eberhard argued that genes are usually followers, not leaders, in evolutionary change. Applied to AI: capability is not intrinsic to model weights — it is a property of weights in interaction with deployment context, prompting, and tooling. The environment is doing evolutionary work we attribute to the model.',
+    eyebrow: 'Contemporary Challenge — Mary Jane West-Eberhard',
+    eyClass: 'ey-caveat',
+    confidence: null,
+    confNote: null,
+    biological: {
+      title: 'West-Eberhard — Developmental Plasticity and Evolution (2003)',
+      body: 'West-Eberhard\'s landmark work argued that phenotypic plasticity — the ability of a single genotype to produce different phenotypes in different environments — is not a side effect of evolution but a primary driver of it. <em>Genes are usually followers, not leaders, in evolutionary change.</em> An organism\'s plastic response to a new environment often precedes and enables the genetic change that later fixes the adaptation. The developmental environment is not passive context — it is an active participant in what the organism expresses and therefore what selection acts on. Capability is not in the genome alone; it is in the genome-environment interaction.'
+    },
+    currentSelector: {
+      title: 'Model Capability as Genome-Environment Interaction',
+      body: 'A model\'s "capability" is not a fixed property of its weights. <em>It is a property of weights in interaction with the prompt, the context window, the tool environment, the deployment infrastructure, and the task framing.</em> The same model, with the same weights, appears highly capable or severely limited depending on how it is deployed and prompted. Chain-of-thought prompting doesn\'t add capability to a model — it changes the developmental environment in which existing capability is expressed. This is phenotypic plasticity: the same genotype (weights) expressing different phenotypes (performance) in different environments (deployment contexts).'
+    },
+    selectorShift: {
+      title: 'The Implications for Evaluation and Strategy',
+      body: '<em>Capability evaluations performed in one context do not generalise reliably to others</em> — which is exactly what the deployment experience of frontier models demonstrates. A model that appears capable on benchmarks may appear limited in production; a model that appears limited on benchmarks may be highly capable when appropriately scaffolded. West-Eberhard\'s framework predicts this: you are evaluating the genotype-in-one-environment, not the genotype\'s full capability range. The strategic implication is significant: <em>prompt engineering, context design, and tool scaffolding may be doing more evolutionary work than training.</em> The deployment environment is not a passive backdrop — it is co-producing the capability.'
+    },
+    accelerate: {
+      title: 'Invest in the Developmental Environment',
+      body: 'If capability is relational rather than intrinsic, investment in the deployment environment may produce better returns than equivalent investment in model training.',
+      bullets: [
+        'Treat prompt engineering and context design as first-class capability research, not just operational optimisation',
+        'Evaluate models across a diverse range of deployment environments, not just standard benchmarks — you are mapping the plasticity range, not a fixed capability score',
+        'Tool scaffolding and agent architectures are capability multipliers that function at the developmental environment level — often cheaper and faster to improve than the model itself',
+        'The organisations that develop the richest deployment environments will consistently outperform their apparent model capabilities'
+      ]
+    },
+    prepare: {
+      title: 'Capability Claims and Context Dependence',
+      body: 'The phenotypic plasticity framing is a direct warning about how capability claims are made and interpreted.',
+      bullets: [
+        'Benchmark performance is a capability measurement in one specific environment — treat it as such, not as a general capability score',
+        'Safety evaluations performed in controlled settings may not predict behaviour in the richer, more adversarial deployment environment — the phenotype changes with the environment',
+        'Competitor capability assessments based on published benchmarks systematically underestimate the range of capability variation achievable through deployment environment optimisation',
+        'The "capability overhang" risk: a model that appears limited may express significantly higher capability under adversarial prompting or in rich tool environments — this is a safety concern, not just a product concern'
+      ]
+    },
+    caveat: 'West-Eberhard\'s plasticity framework applies most cleanly to the prompt-model interaction, where the analogy to developmental environment is direct. It applies less cleanly to the training process itself, where the genome/phenotype distinction breaks down — training is more like Lamarckian inheritance than standard gene expression. The most productive application is to evaluation methodology and deployment strategy, not to the training loop.'
+  }
+
+};
+
+// ─────────────────────────────────────────────────────────────
+// STATE + RENDER
+// ─────────────────────────────────────────────────────────────
+let current = null;
+
+/** Ordered list of all entry ids for keyboard prev/next */
+function getOrderedEntryIds() {
+  const ids = [];
+  SECTIONS.forEach(sec => sec.items.forEach(id => { if (ENTRIES[id]) ids.push(id); }));
+  return ids;
+}
+
+function init() {
+  renderSidebar();
+  renderMain();
+  // Keyboard navigation between sidebar items (arrow keys)
+  document.addEventListener('keydown', function (ev) {
+    const sb = document.getElementById('sidebar');
+    const target = ev.target;
+    if (!sb || !target.closest || !target.closest('#sidebar') || !target.classList.contains('sb-item')) return;
+    const ids = getOrderedEntryIds();
+    const currentId = target.getAttribute('data-id');
+    let idx = ids.indexOf(currentId);
+    if (idx === -1) return;
+    const isPrev = ev.key === 'ArrowUp' || ev.key === 'ArrowLeft';
+    const isNext = ev.key === 'ArrowDown' || ev.key === 'ArrowRight';
+    if (isPrev && idx > 0) {
+      ev.preventDefault();
+      const prevId = ids[idx - 1];
+      select(prevId);
+      const nextBtn = sb.querySelector(`[data-id="${prevId}"]`);
+      if (nextBtn) nextBtn.focus();
+    } else if (isNext && idx < ids.length - 1) {
+      ev.preventDefault();
+      const nextId = ids[idx + 1];
+      select(nextId);
+      const nextBtn = sb.querySelector(`[data-id="${nextId}"]`);
+      if (nextBtn) nextBtn.focus();
+    }
+  });
+}
+
+function select(id) {
+  current = id;
+  renderSidebar();
+  renderMain();
+}
+
+function renderSidebar() {
+  let html = '';
+  SECTIONS.forEach(sec => {
+    html += `<span class="sb-section-label">${sec.label}</span>`;
+    sec.items.forEach(id => {
+      const e = ENTRIES[id];
+      if (!e) return;
+      const active = current === id ? 'active' : '';
+      const ariaCurrent = current === id ? ' aria-current="true"' : '';
+      const label = (e.isPreamble ? 'Introduction and framing' : e.title.split('—')[0].trim()).replace(/"/g, '&quot;');
+      const ariaLabel = current === id ? label + ', selected' : label;
+      if (e.isPreamble) {
+        html += `<button type="button" class="sb-item ${active}" data-id="${id}" aria-label="${ariaLabel}"${ariaCurrent} onclick="select('${id}')">
+          <div class="sb-pip ${sec.pip}"></div>
+          <div>
+            <div class="sb-text">Introduction &amp; framing</div>
+            <div class="sb-sub">Start here — what this framework is and isn't…</div>
+          </div>
+        </button>`;
+        return;
+      }
+      const words = e.premise.split(' ').slice(0, 7).join(' ') + '…';
+      html += `<button type="button" class="sb-item ${active}" data-id="${id}" aria-label="${ariaLabel}"${ariaCurrent} onclick="select('${id}')">
+        <div class="sb-pip ${sec.pip}"></div>
+        <div>
+          <div class="sb-text">${e.title.split('—')[0].trim()}</div>
+          <div class="sb-sub">${words}</div>
+        </div>
+      </button>`;
+    });
+  });
+  document.getElementById('sidebar').innerHTML = html;
+}
+
+function renderMain() {
+  const el = document.getElementById('main');
+
+  const e = ENTRIES[current];
+  if (!e) return;
+
+  // ── PREAMBLE ──────────────────────────────────────────────
+  if (e.isPreamble) {
+    el.innerHTML = `<div class="entry-inner"><div class="preamble-panel">
+      <div class="preamble-eyebrow">About This Framework</div>
+      <div class="preamble-title">What This Is</div>
+      <div class="preamble-lead">AI is a designed system that produces evolutionary-looking patterns. This is a library of those patterns — what they mean, how confidently they transfer, and what they suggest you should accelerate or prepare for.</div>
+
+      <div class="preamble-body">
+        <p>Natural evolution has no author. Mutations are random, selection is blind, drift is noise. The patterns that emerge — niche differentiation, arms races, extinction and radiation — are outputs of an unguided process operating over geological time.</p>
+        <p>AI is different. <em>People make choices.</em> Capital is allocated. Research agendas are set. Architectures are designed. The patterns that look evolutionary — rapid propagation of techniques, competitive dynamics between labs, monoculture risk, capability arms races — emerge from human decisions and incentive structures, not from blind selection pressure.</p>
+        <p>This distinction does not make evolutionary thinking useless here. It makes it more precise. <em>The evolutionary lens is most powerful where intelligent design is weakest</em> — where no single actor controls the outcome, where emergent dynamics exceed the intentions of any designer, where the system is generating its own conditions.</p>
+        <p>That boundary — between designed and emergent — is what this framework is built to locate. Each entry asks: does this biological pattern appear in AI? If so, why, and what does that tell us that a purely strategic analysis would miss?</p>
+      </div>
+
+      <div class="preamble-grid">
+        <div class="preamble-cell">
+          <div class="pcell-label pcell-label-str">Structural Forces</div>
+          <div class="pcell-body">Patterns that appear regardless of who makes what decisions. Selection pressure, niche differentiation, extinction dynamics. The logic is substrate-independent.</div>
+        </div>
+        <div class="preamble-cell">
+          <div class="pcell-label pcell-label-unc">Uncertain Transfers</div>
+          <div class="pcell-body">Biological logic that plausibly applies but where the mechanism may work differently — compressed timescales, co-evolutionary dynamics without generational separation.</div>
+        </div>
+        <div class="preamble-cell">
+          <div class="pcell-label pcell-label-nov">Genuinely Novel Territory</div>
+          <div class="pcell-body">Where AI breaks the analogy productively — Lamarckian inheritance, self-aware selection, horizontal transfer at information speed. No biological precedent. New frameworks needed.</div>
+        </div>
+        <div class="preamble-cell">
+          <div class="pcell-label pcell-label-cav">Theoretical Caveats</div>
+          <div class="pcell-body">Where Gould and Dawkins push back. The just-so story trap, the meme as replicator, contingency, and the central kicker: intelligent design is in the loop.</div>
+        </div>
+        <div class="preamble-cell" style="grid-column: 1 / -1;">
+          <div class="pcell-label" style="color: var(--amber-glow);">Contemporary Challenges</div>
+          <div class="pcell-body">Where the Extended Evolutionary Synthesis goes further than Gould and Dawkins. Kevin Laland on niche construction, Massimo Pigliucci on evolvability, Arlin Stoltzfus on constructive neutral evolution, Mary Jane West-Eberhard on phenotypic plasticity. Each identifies a structural gap the classic theorists missed — and each has direct implications for how we read the AI landscape.</div>
+        </div>
+      </div>
+
+      <div class="preamble-boundary">
+        <strong>The central question this framework asks:</strong> Where in the AI ecosystem is design losing control to emergence? Because wherever that line is — that is where evolutionary pattern-thinking becomes genuinely predictive rather than merely metaphorical. Everything else is a useful framing for strategic thinking, and should be treated as such.
+      </div>
+    </div></div>`;
+    el.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
+
+  // Find section for pip class
+  const sec = SECTIONS.find(s => s.items.includes(current));
+
+  let html = `<div class="entry-inner"><div class="entry-head">
+    <div class="entry-eyebrow ${e.eyClass}">${e.eyebrow}</div>
+    <div class="entry-title">${e.title}</div>
+    <div class="entry-premise">${e.premise}</div>`;
+
+  if (e.confidence !== null) {
+    html += `<div class="confidence-bar">
+      <span class="conf-label">Pattern transfer confidence</span>
+      <div class="conf-track"><div class="conf-fill" style="width:${e.confidence*100}%"></div></div>
+      <span class="conf-note">${e.confNote}</span>
+    </div>`;
+  }
+  html += `</div>`;
+
+  // Biological block
+  html += `<div class="pattern-block pb-fossil">
+    <div class="pb-label pbl-fossil">Biological Pattern</div>
+    <div class="pb-title">${e.biological.title}</div>
+    <div class="pb-body">${e.biological.body}</div>
+  </div>`;
+
+  // Current state block
+  if (e.currentSelector) {
+    html += `<div class="pattern-block pb-amber">
+      <div class="pb-label pbl-amber">In AI Today</div>
+      <div class="pb-title">${e.currentSelector.title}</div>
+      <div class="pb-body">${e.currentSelector.body}</div>
+    </div>`;
+  }
+
+  // Selector shift / implication block
+  if (e.selectorShift) {
+    html += `<div class="pattern-block pb-str">
+      <div class="pb-label pbl-str">The Key Implication</div>
+      <div class="pb-title">${e.selectorShift.title}</div>
+      <div class="pb-body">${e.selectorShift.body}</div>
+    </div>`;
+  }
+
+  // Accelerate + Prepare pair
+  if (e.accelerate || e.prepare) {
+    html += `<div class="action-pair">`;
+    if (e.accelerate) {
+      html += `<div class="action-block ab-acc">
+        <div class="ab-header">
+          <span class="ab-icon">⟶</span>
+          <span class="ab-label abl-acc">Accelerate</span>
+        </div>
+        <div class="ab-title">${e.accelerate.title}</div>
+        <div class="ab-body">${e.accelerate.body}</div>
+        ${e.accelerate.bullets ? `<ul class="action-bullets">${e.accelerate.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>` : ''}
+      </div>`;
+    }
+    if (e.prepare) {
+      html += `<div class="action-block ab-prep">
+        <div class="ab-header">
+          <span class="ab-icon">!</span>
+          <span class="ab-label abl-prep">Prepare For</span>
+        </div>
+        <div class="ab-title">${e.prepare.title}</div>
+        <div class="ab-body">${e.prepare.body}</div>
+        ${e.prepare.bullets ? `<ul class="action-bullets">${e.prepare.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>` : ''}
+      </div>`;
+    } else {
+      html += `<div class="action-block ab-prep" style="opacity:0.3;display:flex;align-items:center;justify-content:center">
+        <span style="font-family:'Consolas','Monaco','Menlo',monospace;font-size:0.6rem;color:var(--text-dim);letter-spacing:0.12em">No direct prepare implication</span>
+      </div>`;
+    }
+    html += `</div>`;
+  }
+
+  // Caveat
+  if (e.caveat) {
+    const cavLabel = e.eybrow && e.eyClass === 'ey-caveat' && e.eyebrow.startsWith('Contemporary')
+      ? '⟁ Note on Application'
+      : e.eyebrow && e.eyebrow.startsWith('Contemporary')
+      ? '⟁ Note on Application'
+      : '⟁ Theoretical Caveat — Gould / Dawkins';
+    html += `<div class="caveat-block">
+      <div class="cav-header">
+        <span class="cav-label">${cavLabel}</span>
+      </div>
+      <div class="cav-body">${e.caveat}</div>
+    </div>`;
+  }
+
+  html += '</div>';
+  el.innerHTML = html;
+  el.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+init();
+setTimeout(() => select('preamble'), 80);
+</script>
+</body>
+</html>
