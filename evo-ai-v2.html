@@ -634,12 +634,19 @@
 
   /* ── MOBILE RESPONSIVENESS (< 768px) ─────────────────────
    * Sidebar becomes horizontal scrollable tab strip below header;
-   * main content takes full width.
+   * whole page scrolls so header/legend scroll away; nav strip is sticky.
    */
   @media (max-width: 767px) {
+    body {
+      display: block;
+      height: 100vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
     .body-wrap {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto 1fr;
+      display: block;
+      min-height: 0;
     }
 
     .sidebar {
@@ -654,6 +661,11 @@
       gap: 0.15rem;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: thin;
+      /* Sticky so nav stays at top when header/legend scroll away */
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg2);
     }
 
     .sb-section-label {
@@ -683,6 +695,7 @@
     .sb-pip { margin-top: 0.25rem; }
 
     .main {
+      overflow-y: visible;
       padding: 1.25rem 1.25rem 2rem;
     }
 
