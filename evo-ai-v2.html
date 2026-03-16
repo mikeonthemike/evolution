@@ -1725,16 +1725,11 @@ function renderMain() {
     html += `</div>`;
   }
 
-  // Caveat
+  // Caveat — single label for all; origin (Gould, Dawkins, Laland, etc.) is in the caveat text
   if (e.caveat) {
-    const cavLabel = e.eybrow && e.eyClass === 'ey-caveat' && e.eyebrow.startsWith('Contemporary')
-      ? '⟁ Note on Application'
-      : e.eyebrow && e.eyebrow.startsWith('Contemporary')
-      ? '⟁ Note on Application'
-      : '⟁ Theoretical Caveat — Gould / Dawkins';
     html += `<div class="caveat-block">
       <div class="cav-header">
-        <span class="cav-label">${cavLabel}</span>
+        <span class="cav-label">⟁ Theoretical Caveat</span>
       </div>
       <div class="cav-body">${e.caveat}</div>
     </div>`;
